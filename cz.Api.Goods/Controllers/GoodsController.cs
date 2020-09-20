@@ -11,16 +11,16 @@ namespace cz.Api.Goods.Controllers
     [ApiController]
     [Route("[controller]")]
     [Authorize]
-    public class WeatherForecastController : ControllerBase
+    public class GoodsController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
         {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+            "Goods1", "Goods2", "Goods3", "Goods4", "Goods5", "Goods6", "Goods7", "Goods8", "Goods9", "Goods10"
         };
 
-        private readonly ILogger<WeatherForecastController> _logger;
+        private readonly ILogger<GoodsController> _logger;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public GoodsController(ILogger<GoodsController> logger)
         {
             _logger = logger;
         }

@@ -27,8 +27,8 @@ namespace cz.MVCClient
 
             services.Configure<CookiePolicyOptions>(options =>
             {
-        // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-        options.CheckConsentNeeded = context => true;
+                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+                options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.Lax;
             });
 
@@ -46,14 +46,31 @@ namespace cz.MVCClient
             {
                 options.RequireHttpsMetadata = false;
                 options.Authority = "http://localhost:5600";
-                options.ClientId = "hybrid_client";
+                options.ClientId = "main_client";
                 options.ClientSecret = "secret";
-                options.ResponseType = "code token id_token";
+                options.ResponseType = "id_token";
                 options.SaveTokens = true;
-                options.ResponseMode = "fragment";
                 options.GetClaimsFromUserInfoEndpoint = true;
-                options.Scope.Add("order");
-                options.Scope.Add("goods");
+                //事件
+                options.Events = new Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectEvents()
+                {
+                    //远程故障
+                    OnRemoteFailure = context =>
+                    {
+                        context.Response.Redirect("/");
+                        context.HandleResponse();
+                        return Task.FromResult(0);
+                    },
+                    //访问拒绝
+                    OnAccessDenied = context =>
+                    {
+                        //重定向到指定页面
+                        context.Response.Redirect("/");
+                        //停止此请求的所有处理并返回给客户端
+                        context.HandleResponse();
+                        return Task.FromResult(0);
+                    },
+                };
             });
         }
 

@@ -18,12 +18,17 @@ namespace cz.MVCClient.Controllers
         {
             _logger = logger;
         }
-
+        [Authorize]
         public IActionResult Index()
         {
-            return View();
+            //模拟返回应用列表
+            List<AppModel> apps = new List<AppModel>();
+            apps.Add(new AppModel() { AppName = "Order Client", Url = "http://localhost:5021" });
+            apps.Add(new AppModel() { AppName = "Goods Client", Url = "http://localhost:5022" });
+            return View(apps);
         }
 
+        [Authorize]
         public IActionResult Privacy()
         {
             return View();
@@ -47,5 +52,6 @@ namespace cz.MVCClient.Controllers
         {
             return SignOut("oidc", "Cookies");
         }
+
     }
 }

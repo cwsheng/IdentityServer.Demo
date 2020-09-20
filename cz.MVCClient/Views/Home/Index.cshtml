@@ -1,8 +1,30 @@
-﻿@{
+﻿@model List<AppModel>
+@{
     ViewData["Title"] = "Home Page";
 }
+<style>
+    .box-wrap {
+        text-align: center;
+        /*        background-color: #d4d4f5;*/
+        overflow: hidden;
+    }
 
+        .box-wrap > div {
+            width: 31%;
+            padding-bottom: 31%;
+            margin: 1%;
+            border-radius: 10%;
+            float: left;
+            background-color: #36A1DB;
+        }
+</style>
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <div class="box-wrap">
+        @foreach (var item in Model)
+        {
+            <div class="box">
+                <a href="@item.Url" target="_blank">@item.AppName</a>
+            </div>
+        }
+    </div>
 </div>

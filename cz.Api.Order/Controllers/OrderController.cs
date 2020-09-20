@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -9,16 +10,17 @@ namespace cz.Api.Order.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class WeatherForecastController : ControllerBase
+    [Authorize]
+    public class OrderController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
         {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+            "Order1", "Order2", "Order3", "Order4", "Order5", "Order6", "Order7", "Order8", "Order9", "Order10"
         };
 
-        private readonly ILogger<WeatherForecastController> _logger;
+        private readonly ILogger<OrderController> _logger;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public OrderController(ILogger<OrderController> logger)
         {
             _logger = logger;
         }

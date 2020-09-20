@@ -91,48 +91,47 @@ namespace cz.IdentityServer
                 },
                 new Client
                 {
-                    ClientId = "implicit_client",
+                    ClientId = "main_client",
                     ClientName = "Implicit Client",
                     ClientSecrets = new [] { new Secret("secret".Sha256()) },
                     AllowedGrantTypes = GrantTypes.Implicit,
-                    AllowedScopes = {
-                        "order","goods",
-                        IdentityServerConstants.StandardScopes.OpenId,
-                        IdentityServerConstants.StandardScopes.Profile
-                    },
-                    RedirectUris = { "http://localhost:5021/signin-oidc" },
-                    PostLogoutRedirectUris = { "http://localhost:5021" },
-                    //是否显示授权提示界面
-                    RequireConsent = true,
-                },
-                new Client
-                {
-                    ClientId = "code_client",
-                    ClientName = "Code Client",
-                    ClientSecrets = new [] { new Secret("secret".Sha256()) },
-                    AllowedGrantTypes = GrantTypes.Code,
-                    RedirectUris = { "http://localhost:5021/signin-oidc" },
-                    PostLogoutRedirectUris = { "http://localhost:5021/signout-callback-oidc" },
+                    RedirectUris = { "http://localhost:5020/signin-oidc" },
+                    PostLogoutRedirectUris = { "http://localhost:5020/signout-callback-oidc" },
                     //是否显示授权提示界面
                     RequireConsent = true,
                     AllowedScopes = {
-                        "order","goods",
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile
                     }
                 },
                 new Client
                 {
-                    ClientId = "hybrid_client",
-                    ClientName = "Hybrid Client",
+                    ClientId = "order_client",
+                    ClientName = "Order Client",
                     ClientSecrets = new [] { new Secret("secret".Sha256()) },
-                    AllowedGrantTypes = GrantTypes.Hybrid,
+                    AllowedGrantTypes = GrantTypes.Code,
+                    AllowedScopes = {
+                        "order","goods",
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile
+                    },
                     RedirectUris = { "http://localhost:5021/signin-oidc" },
                     PostLogoutRedirectUris = { "http://localhost:5021/signout-callback-oidc" },
                     //是否显示授权提示界面
                     RequireConsent = true,
+                },
+                new Client
+                {
+                    ClientId = "goods_client",
+                    ClientName = "Goods Client",
+                    ClientSecrets = new [] { new Secret("secret".Sha256()) },
+                    AllowedGrantTypes = GrantTypes.Code,
+                    RedirectUris = { "http://localhost:5022/signin-oidc" },
+                    PostLogoutRedirectUris = { "http://localhost:5022/signout-callback-oidc" },
+                    //是否显示授权提示界面
+                    RequireConsent = true,
                     AllowedScopes = {
-                        "order","goods",
+                        "goods",
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile
                     }
