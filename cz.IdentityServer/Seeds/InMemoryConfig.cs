@@ -10,7 +10,7 @@ namespace cz.IdentityServer
 {
     public class InMemoryConfig
     {
-        public static IEnumerable<IdentityResource> GetIdentityResourceResources()
+        public static IEnumerable<IdentityResource> GetIdentityResources()
         {
             return new List<IdentityResource>
             {
