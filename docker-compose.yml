@@ -1,0 +1,29 @@
+version: '3.4'
+
+services:
+  cz.identityserver:
+    image: ${DOCKER_REGISTRY-}czidentityserver
+    build:
+      context: .
+      dockerfile: cz.IdentityServer/Dockerfile
+
+  cz.api.order:
+    image: ${DOCKER_REGISTRY-}czapiorder
+    build:
+      context: .
+      dockerfile: cz.Api.Order/Dockerfile
+
+
+  cz.api.goods:
+    image: ${DOCKER_REGISTRY-}czapigoods
+    build:
+      context: .
+      dockerfile: cz.Api.Goods/Dockerfile
+
+
+  cz.mvcclient:
+    image: ${DOCKER_REGISTRY-}czmvcclient
+    build:
+      context: .
+      dockerfile: cz.MVCClient/Dockerfile
+

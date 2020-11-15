@@ -33,44 +33,44 @@ namespace cz.IdentityServer
             {
                 options.MinimumSameSitePolicy = SameSiteMode.Strict;
             });
-            //services.AddIdentityServer()
-            //  .AddDeveloperSigningCredential()
-            //  //api资源
-            //  .AddInMemoryApiResources(InMemoryConfig.GetApiResources())
-            //  //4.0版本需要添加，不然调用时提示invalid_scope错误
-            //  .AddInMemoryApiScopes(InMemoryConfig.GetApiScopes())
-            //  .AddTestUsers(InMemoryConfig.Users().ToList())
-            //  .AddInMemoryIdentityResources(InMemoryConfig.GetIdentityResourceResources())
-            //  .AddInMemoryClients(InMemoryConfig.GetClients());
+            services.AddIdentityServer()
+              .AddDeveloperSigningCredential()
+              //api资源
+              .AddInMemoryApiResources(InMemoryConfig.GetApiResources())
+              //4.0版本需要添加，不然调用时提示invalid_scope错误
+              .AddInMemoryApiScopes(InMemoryConfig.GetApiScopes())
+              .AddTestUsers(InMemoryConfig.Users().ToList())
+              .AddInMemoryIdentityResources(InMemoryConfig.GetIdentityResources())
+              .AddInMemoryClients(InMemoryConfig.GetClients());
 
             //获取连接串
             string connString = _configuration.GetConnectionString("Default");
             string migrationsAssembly = Assembly.GetEntryAssembly().GetName().Name;
-            //添加IdentityServer服务
-            services.AddIdentityServer()
-                //添加这配置数据(客户端、资源)
-                .AddConfigurationStore(opt =>
-                {
-                    opt.ConfigureDbContext = c =>
-                    {
-                        c.UseMySql(connString, sql => sql.MigrationsAssembly(migrationsAssembly));
-                    };
-                })
-                //添加操作数据(codes、tokens、consents)
-                .AddOperationalStore(opt =>
-                {
-                    opt.ConfigureDbContext = c =>
-                    {
-                        c.UseMySql(connString, sql => sql.MigrationsAssembly(migrationsAssembly));
-                    };
-                    //token自动清理
-                    opt.EnableTokenCleanup = true;
-                    //token自动清理间隔：默认1H
-                    opt.TokenCleanupInterval = 3600;
-                    ////token自动清理每次数量
-                    //opt.TokenCleanupBatchSize = 100;
-                })
-                .AddTestUsers(InMemoryConfig.Users().ToList());
+            ////添加IdentityServer服务
+            //services.AddIdentityServer()
+            //    //添加这配置数据(客户端、资源)
+            //    .AddConfigurationStore(opt =>
+            //    {
+            //        opt.ConfigureDbContext = c =>
+            //        {
+            //            c.UseMySql(connString, sql => sql.MigrationsAssembly(migrationsAssembly));
+            //        };
+            //    })
+            //    //添加操作数据(codes、tokens、consents)
+            //    .AddOperationalStore(opt =>
+            //    {
+            //        opt.ConfigureDbContext = c =>
+            //        {
+            //            c.UseMySql(connString, sql => sql.MigrationsAssembly(migrationsAssembly));
+            //        };
+            //        //token自动清理
+            //        opt.EnableTokenCleanup = true;
+            //        //token自动清理间隔：默认1H
+            //        opt.TokenCleanupInterval = 3600;
+            //        ////token自动清理每次数量
+            //        //opt.TokenCleanupBatchSize = 100;
+            //    })
+            //    .AddTestUsers(InMemoryConfig.Users().ToList());
 
         }
 
@@ -79,7 +79,7 @@ namespace cz.IdentityServer
         {
 
             //初始化数据
-            SeedData.InitData(app);
+            //SeedData.InitData(app);
 
             if (env.IsDevelopment())
             {
